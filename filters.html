@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <style>
+        .row {
+            margin-left:0px;
+            margin-right:0px;
+        }
+        
+        #wrapper {
+            padding-left: 70px;
+            transition: all .4s ease 0s;
+            height: 100%
+        }
+        
+        #sidebar-wrapper {
+            margin-left: -150px;
+            left: 50px;
+            width: 150px;
+            background: #222;
+            position: fixed;
+            height: 100%;
+            z-index: 10000;
+            transition: all .4s ease 0s;
+        }
+        
+        .sidebar-nav {
+            display: block;
+            float: left;
+            width: 150px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #page-content-wrapper {
+            padding-left: 0;
+            margin-left: 0;
+            width: 100%;
+            height: auto;
+        }
+        #wrapper.active {
+            padding-left: 130px;
+        }
+        #wrapper.active #sidebar-wrapper {
+            left: 150px;
+        }
+        
+        #page-content-wrapper {
+          width: 100%;
+        }
+        
+        #sidebar_menu li a, .sidebar-nav li a {
+            color: #999;
+            display: block;
+            float: right;
+            text-decoration: none;
+            width: 150px;
+            background: #252525;
+            border-top: 1px solid #373737;
+            border-bottom: 1px solid #1A1A1A;
+            -webkit-transition: background .5s;
+            -moz-transition: background .5s;
+            -o-transition: background .5s;
+            -ms-transition: background .5s;
+            transition: background .5s;
+        }
+        .sidebar_name {
+            padding-top: 25px;
+            color: #fff;
+            opacity: .7;
+        }
+        
+        .sidebar-nav li {
+          line-height: 40px;
+          text-indent: 20px;
+        }
+        
+        .sidebar-nav li a {
+          color: #999999;
+          display: block;
+          text-decoration: none;
+        }
+        
+        .sidebar-nav li a:hover {
+          color: #fff;
+          background: rgba(255,255,255,0.2);
+          text-decoration: none;
+        }
+        
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus {
+          text-decoration: none;
+        }
+        
+        .sidebar-nav > .sidebar-brand {
+          height: 65px;
+          line-height: 60px;
+          font-size: 18px;
+        }
+        
+        .sidebar-nav > .sidebar-brand a {
+          color: #999999;
+        }
+        
+        .sidebar-nav > .sidebar-brand a:hover {
+          color: #fff;
+          background: none;
+        }
+        
+        #main_icon
+        {
+            float:right;
+           padding-right: 20px;
+           padding-top:20px;
+        }
+        .sub_icon
+        {
+            float:right;
+           padding-right: 20px;
+           padding-top:10px;
+        }
+        .sub_btn
+        {
+            float:right;
+           padding-right: 20px;
+           padding-top:10px;
+        }
+
+        @media (max-width:767px) {
+            #wrapper {
+            padding-left: 70px;
+            transition: all .4s ease 0s;
+            }
+            #sidebar-wrapper {
+                left: 70px;
+            }
+        }
+        
+        td {
+            font-size: 15px;
+            width: 20%;
+        }
+    </style>
+    <title>Filters</title>
+  </head>
+  <body class="bg-secondary">
+    <div id="wrapper">
+    
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul id="sidebar_menu" class="sidebar-nav">
+                <li class="sidebar-brand"><a id="menu-toggle" href="#">
+                   <i class="fa fa-bars" id="main_icon" aria-hidden="true"></i></a>
+                </li>
+          </ul>
+            <ul class="sidebar-nav btn-group btn-group-vertical" id="sidebar">     
+                <li>
+                    <button type="button" class="btn btn-light btn-sm mt-2 mb-2 w-25">
+                         <strong>+</strong>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-light btn-sm w-25">
+                        <strong>&#35;</strong>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-light btn-sm mt-4 mb-2 w-25">
+                        <img src="./filters/ikons/filter1.png" />
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-light btn-sm mb-2 w-25">
+                        <img src="./filters/ikons/list2.png" />
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-light btn-sm mb-2 w-25">
+                        &nbsp;
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-light btn-sm w-25">
+                        &#9679;
+                    </button>
+                </li>
+            </ul>
+          </div>
+              
+          <!-- Page content -->
+          <div id="page-content-wrapper bg-secondary">
+            <div class="page-content inset">
+              <div class="row">
+                  <div class="col-md-12">
+                  <h6 class="text-center mt-1 text-white">Управление фильтрами</h6>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                  <table class="table table-sm table-bordered table-striped bg-white table-hover w-100">
+                    <thead>
+                      <tr>
+                        <th class="bg-white">
+                            <form>
+                              <div class="form-row">
+                                <div class="col">
+                                    <input class="form-control form-control-sm" id="InputFilter" type="text" placeholder="Поиск фильтра"></th>
+                                </div>
+                              </div>
+                            </form>
+                        <th class="bg-white">
+                            <form>
+                              <div class="form-row">
+                                <div class="col">
+                                  <input type="text" class="form-control form-control-sm" id="Filter" placeholder="Фильтр">
+                                </div>
+                                <div class="col">
+                                  <input type="text" class="form-control form-control-sm" id="Name" placeholder="Имя">
+                                </div>
+                              </div>
+                            </form>
+                        </th>
+                        <th class="bg-white"># Email.ru</th>
+                        <th class="bg-white"># Email.com</th>
+                        <th class="bg-white"># Email.ua</th>
+                      </tr>
+                    </thead>
+                    <tbody id="Table">
+                      <tr>
+                        <td>
+                            <button class="btn btn-sm btn-success w-75" type="button">
+                                +
+                            </button></td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="table-success"># Email.ru</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="table-success"># Email.com</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="table-success"># Email.ua</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td class="table-info"># Возраст</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td class="table-success"># Город</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td class="table-info"># Пол</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td class="table-success"># Активность</td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="form-check d-inline float-left">
+                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            </div>
+                            <div class="d-inline">
+                                <img src="./filters/image/105086.jpg" class="rounded-circle float-left mr-1" alt="Sample image">
+                            </div>
+                            <div class="d-inline">
+                                <p>Имя Фамилия</p>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+        });
+        
+      $("#InputFilter").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+
+        $("#Filter").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+        $("#Name").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+  </body>
+</html>
